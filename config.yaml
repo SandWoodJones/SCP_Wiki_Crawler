@@ -1,0 +1,10 @@
+---
+    initial_site: "http://www.scpwiki.com/"
+    links_file: "found_links.yaml"
+    blacklisting_regex:
+        - r"^\/(system|forum|random|news-\d{2}-\d{4})"
+        - r"^\/(young-and-under-30|new-pages-feed|most-recently-(edited|created))"
+        - r"^\/((scp|tale)-calendar|top-rated-pages-by-month-\d{4})"
+        - r"^\/(licensing-master-list|local--files)"
+        - r"^\/(miss-lohner-s-sandbox|bluesoul|decibelle-s-workbench)"
+        - r".*(author-page|personnel-file|archive(-i+)*|#.*)$"

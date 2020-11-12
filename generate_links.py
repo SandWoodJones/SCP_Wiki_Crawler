@@ -11,28 +11,22 @@ import yaml
 
 re.MULTILINE = True
 
-initialWebsite = "http://www.scpwiki.com/"
+with open("config.yaml", "r") as file:
+	config = yaml.safe_load(file)
+
+initialWebsite = config["initial_site"]
 
 visited_links = set()
 target_links_buffer = { initialWebsite }
 
- # skips the forum, system and author pages, newly posted and archived articles, etc
- # TODO: maybe move this to somewhere else. dont know where
-blacklist = re.compile(
-	r'('
-		r'^\/('
-			r'system|forum|random|news-\d{2}-\d{4}|'
-			r'young-and-under-30|new-pages-feed|most-recently-(edited|created)|'
-			r'(scp|tale)-calendar|top-rated-pages-by-month-\d{4}|'
-			r'licensing-master-list|'
-			r'miss-lohner-s-sandbox|bluesoul|/decibelle-s-workbench|'
-			r'local--files'
-		r')[/:]?|'
-		r'.*('
-			r'author-page|personnel-file|archive(-i+)*|#.*'
-		r')$'
-	r')'
-)
+# merges the regex patterns in the config into one compiled pattern
+blacklist_string = ""
+for i in range(len(config["blacklisting_regex"])):
+	blacklist_string += config["blacklisting_regex"][i]
+	if i != len(config["blacklisting_regex"]) - 1:
+		blacklist_string += "|"
+
+blacklist = re.compile(blacklist_string)
 
 def save_to_yaml(): # TODO: write this myself to get indentation how i want it
 	with open("found_links.yaml", 'w+') as file:
