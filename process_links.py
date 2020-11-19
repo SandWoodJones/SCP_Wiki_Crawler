@@ -17,5 +17,5 @@ with open(config["links_file"], 'r') as f:
 
 list_of_links.sort()
 
-# with open(config["links_file"], "w+") as f:
-# 	yaml.dump(list_of_links, f, explicit_start=True, default_flow_style=False)
+with open(config["links_file"], "w+") as f:
+	yaml.dump(list_of_links, f, explicit_start=True, default_flow_style=False)
